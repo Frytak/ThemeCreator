@@ -1,0 +1,10 @@
+.themeEditor {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.4rem;
+    width: min-content;
+    padding: 1rem;
+    border-radius: 0.6rem;
+
+    background-color: var(--depth3);
+}

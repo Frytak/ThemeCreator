@@ -1,0 +1,24 @@
+#root {
+    --depth0: #080808;
+    --depth1: #121212;
+    --depth2: #1b1b1b;
+    --depth3: #141414;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: white;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
