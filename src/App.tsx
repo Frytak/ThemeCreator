@@ -1,6 +1,6 @@
 import CodeSnippet from './components/CodeSnippet/CodeSnippet'
 import ThemeEditor, { theme } from './components/ThemeEditor/ThemeEditor'
-import E from './components/CodeSnippet/Element'
+import E from './components/CodeSnippet/Element/Element'
 import { createStore } from 'solid-js/store'
 import style from './App.module.css'
 
@@ -54,14 +54,19 @@ function App() {
     ]
 
     return (
-        <main class={style.App} style={{"background-color": "var(--depth2)", "width": "100vw", "height": "100vh"}}>
+        <main class={style.App} >
             <section class={style.welcome}>
                 <h1>Welcome to Theme Creator!</h1>
                 <p>Creating themes for code is hard. Having to reload, go to some project to check how it looks like with different languages is tidious. That's why I made this website! You can choose from the default code snippets or create your own and edit the theme!</p>
             </section>
 
-            <CodeSnippet theme={theme} codeSnippet={exampleCodeSnippets[0]}/>
-            <ThemeEditor theme={theme} setTheme={setTheme}/>
+            <section class={style.codeSnippets}>
+                <CodeSnippet theme={theme} codeSnippet={exampleCodeSnippets[0]}/>
+            </section>
+
+            <section class={style.themeEditor}>
+                <ThemeEditor theme={theme} setTheme={setTheme}/>
+            </section>
         </main>
     )
 }

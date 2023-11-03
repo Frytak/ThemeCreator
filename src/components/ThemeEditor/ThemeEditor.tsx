@@ -1,6 +1,6 @@
 import { For } from 'solid-js'
 import style from './ThemeEditor.module.css'
-import ValueEditor from './ValueEditor'
+import ValueEditor from './ValueEditor/ValueEditor'
 import { SetStoreFunction } from 'solid-js/store'
 
 export type color = string

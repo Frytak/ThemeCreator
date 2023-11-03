@@ -1,12 +1,53 @@
 .App {
-    background-color: var(--depth1);
+    background-color: var(--depth2);
     display: flex;
     flex-direction: column;
+    gap: 4em;
+    width: 100vw;
+    height: 100vh;
 }
 
+
+
+/*=========
+ * Welcome
+ *=========*/
 .welcome {
     display: flex;
     flex-direction: column;
-    justify-items: center;
     align-items: center;
+    justify-items: center;
+    gap: 0.2em;
+}
+
+.welcome h1 {
+    font-size: 3em;
+}
+
+.welcome p {
+    font-size: 1.2em;
+    text-align: center;
+    max-width: 38em;
+}
+
+
+
+/*===============
+ * Code Snippets
+ *===============*/
+.codeSnippets {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/*==============
+ * Theme Editor
+ *==============*/
+.themeEditor {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

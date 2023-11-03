@@ -1,0 +1,44 @@
+.valueEditor {
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+}
+
+.colorInput {
+    /* Reset the apperance*/
+    outline: none;
+    border-image: none;
+    block-size: initial;
+    inline-size: initial;
+    appearance: none;
+    -webkit-appearance: none;
+
+    /* Actual style */
+    border-width: 0.2rem;
+    border-style: solid;
+    border-color: var(--depth0);
+    border-radius: 100%;
+
+    background-color: var(--depth0);
+
+    min-width: 1em;
+    min-height: 1em;
+
+    width: 1.8em;
+    height: 1.8em;
+}
+
+.colorInput::-webkit-color-swatch-wrapper {
+    /* Reset the apperance*/
+    padding: 0; 
+}
+
+.colorInput::-webkit-color-swatch {
+    /* Reset the apperance*/
+    border: none;
+
+    /* Actual style */
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+}
