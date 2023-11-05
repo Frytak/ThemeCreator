@@ -1,14 +1,17 @@
-import { color } from './../../ThemeEditor/ThemeEditor'
 import style from './Element.module.css'
+import { theme } from './../../ThemeEditor/ThemeEditor'
+import { useThemeContext } from '../../../App';
 
 interface ElementProps {
-    highlight: color,
+    v: keyof theme,
     children: any,
 }
 
 export default function E(props: ElementProps) {
+    const [theme] = useThemeContext()
+
     return (
-        <abbr title="Gami to furras" class={style.Element} style={{color: props.highlight}}>
+        <abbr title={props.v} class={style.Element} style={{color: theme?.[props.v]}}>
             {props.children}
         </abbr>
     )

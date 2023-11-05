@@ -1,7 +1,7 @@
 import { For } from 'solid-js'
 import style from './ThemeEditor.module.css'
 import ValueEditor from './ValueEditor/ValueEditor'
-import { SetStoreFunction } from 'solid-js/store'
+import { useThemeContext } from '../../App'
 
 export type color = string
 export interface theme {
@@ -42,23 +42,16 @@ export interface theme {
     Todo: color, // TODO FIXME and XXX
 }
 
-interface ThemeEditorProps {
-    theme: theme
-    setTheme: SetStoreFunction<theme>
-}
+export default function ThemeEditor() {
+    const [theme] = useThemeContext()
 
-export default function ThemeEditor(props: ThemeEditorProps) {
     return (
         <section class={style.themeEditor}>
-            <For each={Object.keys(props.theme)} >
-                {(v,i)=>{
-                    let gridColumn = "";
-                    switch (i()+1%3) {
-                        case 1: gridColumn = "1 / 2"; break;
-                        case 2: gridColumn = "2 / 3"; break;
-                        case 3: gridColumn = "3 / 4"; break;
-                    }
-                    return <ValueEditor style={{"grid-column": gridColumn}} theme={props.theme} setTheme={props.setTheme} value={v}/>
+            <For each={Object.keys(theme)} >
+                {(v, i)=>{
+                    let column = (i() % 4) + 1;
+                    let gridColumn = column + " / " + (column + 1)
+                    return <ValueEditor style={{"grid-column": gridColumn}} value={v as keyof theme}/>
                 }}
             </For>
         </section>

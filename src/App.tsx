@@ -1,8 +1,18 @@
 import CodeSnippet from './components/CodeSnippet/CodeSnippet'
 import ThemeEditor, { theme } from './components/ThemeEditor/ThemeEditor'
-import E from './components/CodeSnippet/Element/Element'
-import { createStore } from 'solid-js/store'
+import { SetStoreFunction, createStore } from 'solid-js/store'
 import style from './App.module.css'
+import { createContext, useContext } from 'solid-js'
+import exampleCodeSnippets from './components/CodeSnippet/ExampleCodeSnippets'
+
+
+const ThemeContext = createContext<[theme | undefined, SetStoreFunction<theme> | undefined]>([undefined, undefined])
+export function useThemeContext(): [theme, SetStoreFunction<theme>] | undefined {
+    const [theme, setTheme] = useContext(ThemeContext)
+
+    if (theme === undefined || setTheme === undefined) { return }
+    return [theme, setTheme]
+}
 
 function App() {
     const [theme, setTheme] = createStore<theme>({
@@ -13,7 +23,7 @@ function App() {
         Float: '#ff0000',
         Operator: '#ff0000',
         Identifier: '#ff0000',
-        Function: '#1DD197',
+        Function: '#ff0000',
         Statement: '#ff0000',
         Conditional: '#ff0000',
         Repeat: '#ff0000',
@@ -43,15 +53,6 @@ function App() {
         Todo: '#ff0000',
     })
 
-    const exampleCodeSnippets = [
-        (
-            <>
-                <E highlight={theme.Keyword}>fn</E> <E highlight={theme.Function}>main</E>() <E highlight={theme.Operator}>{'->'}</E> <E highlight={theme.Type}>Result</E><E highlight={theme.Operator}>{'<'}</E>(), <E highlight={theme.Structure}>KaavioError</E><E highlight={theme.Operator}>{'>'}</E> {'{'}<br/>
-                &emsp;&emsp;&emsp;&emsp;<E highlight={theme.Keyword}>let</E> <E highlight={theme.StorageClass}>mut</E> <E highlight={theme.Identifier}>console</E> <E highlight={theme.Operator}>=</E> <E highlight={theme.Structure}>Console</E><E highlight={theme.Delimiter}>::</E><E highlight={theme.Function}>new</E>()<E highlight={theme.Special}>?</E>;<br/>
-                {'}'}
-            </>
-        )
-    ]
 
     return (
         <main class={style.App} >
@@ -60,13 +61,15 @@ function App() {
                 <p>Creating themes for code is hard. Having to reload, go to some project to check how it looks like with different languages is tidious. That's why I made this website! You can choose from the default code snippets or create your own and edit the theme!</p>
             </section>
 
-            <section class={style.codeSnippets}>
-                <CodeSnippet theme={theme} codeSnippet={exampleCodeSnippets[0]}/>
-            </section>
+            <ThemeContext.Provider value={[theme, setTheme]}>
+                <section class={style.codeSnippets}>
+                    <CodeSnippet codeSnippet={exampleCodeSnippets.rustTrait}/>
+                </section>
 
-            <section class={style.themeEditor}>
-                <ThemeEditor theme={theme} setTheme={setTheme}/>
-            </section>
+                <section class={style.themeEditor}>
+                    <ThemeEditor/>
+                </section>
+            </ThemeContext.Provider>
         </main>
     )
 }
